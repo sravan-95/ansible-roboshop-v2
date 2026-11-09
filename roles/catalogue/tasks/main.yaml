@@ -22,7 +22,7 @@
 - name: create app directory
   ansible.builtin.file:
    path: /app
-   tate: directory
+   state: directory
 - name: download catalogue
   ansible.builtin.get_url:
    url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
