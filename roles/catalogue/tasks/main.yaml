@@ -2,36 +2,36 @@
   command: dnf module enable nodejs:20 -y
 - name: install nodejs 20
   ansible.builtin.package:
-      name: nodejs
-      state: present
+   name: nodejs
+   state: present
 - name: create system user
   ansible.builtin.user:
-      name: roboshop
-      system: true
-      home: /app
-      shell: /sbin/nologin
-      comment: "Roboshop System user"
+   name: roboshop
+   system: true
+   home: /app
+   shell: /sbin/nologin
+   comment: "Roboshop System user"
 - name: remove old app directory
   ansible.builtin.file:
-      path: /app
-      state: absent
+   path: /app
+   state: absent
 - name: delete catalogue.zip in tmp directory
   ansible.builtin.file:
-      path: /tmp/catalogue.zip
-      state: absent
+   path: /tmp/catalogue.zip
+   state: absent
 - name: create app directory
   ansible.builtin.file:
-      path: /app
-      state: directory
+   path: /app
+   tate: directory
 - name: download catalogue
   ansible.builtin.get_url:
-      url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
-      dest: /tmp/catalogue.zip
+   url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
+   dest: /tmp/catalogue.zip
 - name: unzip catalogue
   ansible.builtin.unarchive:
-      src: /tmp/catalogue.zip
-      dest: /app
-      remote_src: yes
+   src: /tmp/catalogue.zip
+   dest: /app
+   remote_src: yes
 - name: install dependencies
   community.general.npm:
    path: /app
@@ -54,7 +54,7 @@
   - sai
 - name: print catalogue_output
   debug: 
-     msg: "{{ catalogue_output }}"
+   msg: "{{ catalogue_output }}"
   tags:
   - mongodb
 - name: load products
